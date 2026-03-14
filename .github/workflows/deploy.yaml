@@ -54,6 +54,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i website-key.pem ec2-user@${PUBLIC_IP} << EOF
             aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 897074276729.dkr.ecr.us-east-2.amazonaws.com
             docker pull 897074276729.dkr.ecr.us-east-2.amazonaws.com/ecr-site-prod:v1.0
+            docker stop site || true
+            docker rm site || true
             docker run -d -p 80:80 --name meu-website 897074276729.dkr.ecr.us-east-2.amazonaws.com/ecr-site-prod:v1.0
             docker ps
           EOF
