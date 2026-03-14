@@ -38,6 +38,7 @@ jobs:
 
   job2:
     name: deploy_ec2
+    needs: job1
     runs-on: ubuntu-latest
 
     env:
